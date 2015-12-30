@@ -2,6 +2,15 @@ html {
   width: 32em;
 }
 
+body {
+  transition: .1s all;
+  opacity: 1.0;
+}
+
+body[data-uninitialized=true] {
+  opacity: 0.0;
+}
+
 label {
   cursor: pointer;
 }
@@ -29,5 +38,5 @@ body.dirty .saving-message {
 }
 
 p {
-  margin: .25em;
+  margin: .125em;
 }

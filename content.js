@@ -13,8 +13,12 @@ const gotOptions = new Promise(
 gotOptions.then(options => {
   try {
     if (!options) {
+      // TODO: avoid manually duplicating this in both places
       options = {
         hideAll: true,
+        matchMode: 'blacklist',
+        matchSites: [],
+        matchStrings: [],
         hideIfAllHidden: false,
         showOptionsLink: true
       };
@@ -33,11 +37,11 @@ gotOptions.then(options => {
 
         let hide = options.hideAll;
 
-        if (!hide && options.hideSites) for (const siteInput of options.hideSites) {
+        if (!hide && options.matchSites) for (const siteInput of options.matchSites) {
           const site = siteInput.toLowerCase();
           const iconTitle = icon && icon.title.toLowerCase();
 
-          if (iconTitle === site || iconTitle.replace(/ stack exchange$/, '') === site) {
+          if (iconTitle && (iconTitle === site || iconTitle.replace(/ stack exchange$/, '') === site)) {
             hide = true;
           } else if (
             icon && !/ /.test(icon) &&
@@ -50,7 +54,7 @@ gotOptions.then(options => {
           }
         }
 
-        if (!hide && link && options.hideStrings) for (const keyword of options.hideStrings) {
+        if (!hide && link && options.matchStrings) for (const keyword of options.matchStrings) {
           // Clbuttic.
           if (link.textContent.indexOf(keyword) > -1) {
             hide = true;

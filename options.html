@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="/options.css" />
 </head>
 
-<body>
+<body data-uninitialized="true">
   <form>
     <p>
       <label>
@@ -21,18 +21,18 @@
       <label>
     </p>
 
-    <fieldset>
-      <legend>
-        <label>
-          <input name="blockMode" type="radio" value="some" checked>
-          Hide questions matching
-          <label><input name="matchMode" type="radio" value="any" checked />any</label>
-          /
-          <label><input name="matchMode" type="radio" value="none" />none</label>
-          of the following
-        </label>
-      </legend>
+    <p>
+      <label>
+        <input name="blockMode" type="radio" value="some" checked>
+        Hide questions matching
+        <label><input name="matchMode" type="radio" value="blacklist" checked />any</label>
+        /
+        <label style="opacity: 0.5;" title="not implemented"><input name="matchMode" type="radio" value="whitelist" disabled="disabled" />none</label>
+        of the following
+      </label>
+    </p>
 
+    <fieldset>
       <p>
         <label>
           Questions from these sites:
@@ -48,7 +48,7 @@ anime
         <label>
           Questions with titles containing these words/phrases:
 
-          <textarea name="keywords" placeholder="star wars
+          <textarea name="strings" placeholder="star wars
 the force
 skywalker
 ..."></textarea>
