@@ -16,18 +16,18 @@
   <form>
     <p>
       <label>
-        <input name="blockMode" type="radio" value="all">
+        <input name="blockMode" id="blockModeAll" type="radio" value="all">
         Hide all questions
       <label>
     </p>
 
     <p>
       <label>
-        <input name="blockMode" type="radio" value="some" checked>
+        <input name="blockMode" id="blockModeSome" type="radio" value="some">
         Hide questions matching
-        <label><input name="matchMode" type="radio" value="blacklist" checked />any</label>
+        <label><input name="matchMode" id="matchModeBlacklist" type="radio" value="blacklist" />any</label>
         /
-        <label style="opacity: 0.5;" title="not implemented"><input name="matchMode" type="radio" value="whitelist" disabled="disabled" />none</label>
+        <label><input name="matchMode" id="matchModeWhitelist" type="radio" value="whitelist" />none</label>
         of the following
       </label>
     </p>
@@ -58,7 +58,7 @@ skywalker
 
     <p>
       <label>
-        <input name="showOptionsLink" type="checkbox" checked />
+        <input name="showOptionsLink" type="checkbox" />
         Show link to these options below question list
       </label>
     </p>

@@ -21,10 +21,16 @@ Promise.all([domContentLoaded, gotOptions]).then(results => {
 
   const form = document.querySelector('form');
 
-  // options = null;
-
   form.sites.value = options.matchSites && options.matchSites.join('\n') || '';
   form.strings.value = options.matchStrings && options.matchStrings.join('\n') || '';
+  form.showOptionsLink.checked = options.showOptionsLink;
+  form.hideSectionIfEmpty.checked = options.hideIfAllHidden;
+
+  form.matchModeBlacklist.checked = options.matchMode === 'blacklist';
+  form.matchModeWhitelist.checked = options.matchMode !== 'blacklist';
+
+  form.blockModeAll.checked = options.hideAll;
+  form.blockModeSome.checked = !options.hideAll;
 
   document.body.dataset.uninitialized = 'false';
 
@@ -51,7 +57,7 @@ Promise.all([domContentLoaded, gotOptions]).then(results => {
       document.body.classList.remove('dirty');
       console.log("saved options", options);
     });
-  }, 1000);
+  }, 750);
 
   const onPotentialChange = () => {
     document.body.classList.add('dirty');

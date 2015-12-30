@@ -35,33 +35,37 @@ gotOptions.then(options => {
         const icon = item.querySelector('.favicon');
         const link = item.querySelector('a');
 
-        let hide = options.hideAll;
+        let matched = options.hideAll && options.matchMode === 'blacklist';
 
-        if (!hide && options.matchSites) for (const siteInput of options.matchSites) {
+        if (!matched && options.matchSites) for (const siteInput of options.matchSites) {
           const site = siteInput.toLowerCase();
           const iconTitle = icon && icon.title.toLowerCase();
 
-          if (iconTitle && (iconTitle === site || iconTitle.replace(/ stack exchange$/, '') === site)) {
-            hide = true;
+          if (iconTitle && (iconTitle === site ||
+                            iconTitle.replace(/ stack exchange$/, '') === site) ||
+                            iconTitle.replace(/ answers$/, '') === site)) {
+            matched = true;
           } else if (
-            icon && !/ /.test(icon) &&
+            icon && !/ /.test(site) &&
             icon.classList.contains(`favicon-${site}`)
           ) {
-            hide = true;
+            matched = true;
           } else if (link && (link.hostname === site ||
-                              link.hostname.replace(/\.stackexchange\.com$/) === site)) {
-            hide = true;
+                              link.hostname.replace(/\.stackexchange\.com$/) === site ||
+                              link.hostname.replace(/\.com$/) === site)) {
+            matched = true;
           }
         }
 
-        if (!hide && link && options.matchStrings) for (const keyword of options.matchStrings) {
+        if (!matched && link && options.matchStrings) for (const keyword of options.matchStrings) {
           // Clbuttic.
           if (link.textContent.indexOf(keyword) > -1) {
-            hide = true;
+            matched = true;
           }
         }
 
-        if (hide) {
+        if ((options.matchMode === 'blacklist' && matched) ||
+            (options.matchMode !== 'blacklist' && !matched)) {
           visibleItems.delete(item);
           hiddenItems.add(item);
           item.dataset.jbsehnqHidden = 'true';
