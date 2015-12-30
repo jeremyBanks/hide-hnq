@@ -23,7 +23,7 @@ if (!options.hideAll) {
   const hiddenItems = new Set();
 
   if (!('update_url' in chrome.runtime.getManifest())) {
-    console.log("Debug mode enabled for Block Hot Network Question on Stack Exchange.");
+    console.log("Debug mode enabled for Hide Hot Network Question on Stack Exchange.");
   } else {
     console.debug = function() {};
     console.log = function() {};

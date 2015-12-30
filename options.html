@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   
   <title>
-    Options to Block Hot Network Question on Stack Exchange
+    Options to Hide Hot Network Question on Stack Exchange
   </title>
   
   <script src="/options.js"></script>
@@ -14,7 +14,7 @@
 
 <body>
   <h1>
-    Block Hot Network Question on Stack Exchange - Options
+    Hide Hot Network Question on Stack Exchange - Options
   </h1>
   
   <h1>NOT IMPLEMENTED</h1>
@@ -23,15 +23,19 @@
     <p>
       <label>
         <input type="radio" name="blockMode" value="all">
-        Block all Hot Network Questions
+        Hide all Hot Network Questions
       <label>
     </p>
     
     <fieldset>
       <legend>
         <label>
-          <input type="radio" name="blockMode" value="some">
-          Block Hot Network Questions matching any of these criteria
+          <input type="radio" name="blockMode" value="some" checked>
+          Hide Hot Network Questions matching
+          <label><input type="radio" name="matchMode" value="any" checked>any</label>
+          /
+          <label><input type="radio" name="matchMode" value="none">none</label>
+          of these criteria
         </label>
       </legend>
       
