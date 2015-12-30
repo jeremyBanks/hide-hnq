@@ -1,9 +1,33 @@
+html {
+  width: 32em;
+}
+
 label {
-  padding: 4px 0;
   cursor: pointer;
 }
 
-label:hover {
-  border-bottom: 3px solid rgba(0, 0, 0, 0.5);
-  margin-bottom: -3px;
+textarea {
+  width: 100%;
+  font-size: 1.25em;
+  font-family: monospace;
+  height: 5em;
+  line-height: 1.1em;
+}
+
+.saving-message {
+  position: absolute;
+  top: 4px;
+  right: 36px;
+  opacity: 0;
+  transition: 1s;
+  font-style: italic;
+  color: #DDD;
+}
+
+body.dirty .saving-message {
+  opacity: 1.0;
+}
+
+p {
+  margin: .25em;
 }

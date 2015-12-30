@@ -1,7 +1,16 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', (event) => {
-  const onPotentialChange = () => {
+  const form = document.querySelector('form');
+
+  let potentiallyChanged = false;
+
+  // storage.sync is throttled, so we don't want to go *too* fast.
+  setInterval(() => {
+    if (!potentiallyChanged) return;
+
+    potentiallyChanged = false;
+
     const options = {
       hideAll: false,
 
@@ -21,15 +30,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
     };
 
     chrome.storage.sync.set({'options': options}, () => {
+      document.body.classList.remove('dirty');
       console.log("Saved options");
     });
+  }, 1000);
+
+  const onPotentialChange = () => {
+    document.body.classList.add('dirty');
+    potentiallyChanged = true;
   };
 
-  const form = document.querySelector('form');
-
-  form.addEventListener('change', onPotentialChange);
   form.addEventListener('input', onPotentialChange);
-  form.addEventListener('click', onPotentialChange);
+  form.addEventListener('change', onPotentialChange);
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     onPotentialChange();

@@ -1,8 +1,8 @@
-#hot-network-questions:not([data-jbsehnq-hidden=false]) {
+#hot-network-questions:not([data-jbsehnq-error]):not([data-jbsehnq-hidden=false]) {
   display: none !important;
 }
 
-#hot-network-questions li[data-jbsehnq-hidden=true] {
+#hot-network-questions:not([data-jbsehnq-error]) li[data-jbsehnq-hidden=true] {
   display: none !important;
 }
 
