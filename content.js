@@ -42,7 +42,7 @@ gotOptions.then(options => {
           const iconTitle = icon && icon.title.toLowerCase();
 
           if (iconTitle && (iconTitle === site ||
-                            iconTitle.replace(/ stack exchange$/, '') === site) ||
+                            iconTitle.replace(/ stack exchange$/, '') === site ||
                             iconTitle.replace(/ answers$/, '') === site)) {
             matched = true;
           } else if (
