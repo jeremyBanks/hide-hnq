@@ -1,0 +1,7 @@
+#hot-network-questions:not([data-jbsehnq-hidden=false]) {
+  display: none !important;
+}
+
+#hot-network-questions li[data-jbsehnq-hidden=true] {
+  display: none !important;
+}
