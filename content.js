@@ -85,9 +85,12 @@ gotOptions.then(options => {
         hnq.insertBefore(optionsLink, null);
       }
     }
+
+    console.info(hiddenItems.size, " hot network questions (", hiddenItems, ") hidden by chrome://extensions/?options=jommfgnflipjalbpbgcfghdpoeijpoab");
   } catch (error) {
     // In case of error, we'll set this to make everything visible again.
     hnq.dataset.jbsehnqError = String(error);
+
     console.error(error);
     throw error;
   }
