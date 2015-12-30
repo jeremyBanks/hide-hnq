@@ -15,6 +15,8 @@ gotOptions.then(options => {
     if (!options) {
       options = {
         hideAll: true,
+        hideIfAllHidden: false,
+        showOptionsLink: true
       };
     }
 
@@ -22,18 +24,20 @@ gotOptions.then(options => {
     const visibleItems = options.hideAll ? new Set() : new Set(items);
     const hiddenItems = options.hideAll ? new Set(items) : new Set();
 
-    if (!options.hideAll) {
+    if (!(options.hideAll && options.hideIfAllHidden)) {
       // Not tremendously efficient.
 
       for (const item of items) {
         const icon = item.querySelector('.favicon');
         const link = item.querySelector('a');
 
-        let hide = false;
+        let hide = options.hideAll;
 
-        if (!hide && options.hideSites) for (const site of options.hideSites) {
-          if (icon && (icon.title === site ||
-                       icon.title.replace(/ Stack Exchange$/, '') === site)) {
+        if (!hide && options.hideSites) for (const siteInput of options.hideSites) {
+          const site = siteInput.toLowerCase();
+          const iconTitle = icon && icon.title.toLowerCase();
+
+          if (iconTitle === site || iconTitle.replace(/ stack exchange$/, '') === site) {
             hide = true;
           } else if (
             icon && !/ /.test(icon) &&
@@ -61,7 +65,11 @@ gotOptions.then(options => {
       }
     }
 
-    if (options.hideIfAllhidden && visibleItems.size > 0) {
+    if (visibleItems.size == 0) {
+      hnq.querySelector('a.show-more').dataset.jbsehnqHidden = 'true';
+    }
+
+    if (!options.hideIfAllHidden || visibleItems.size > 0) {
       hnq.dataset.jbsehnqHidden = 'false';
 
       if (options.showOptionsLink) {

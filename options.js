@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     potentiallyChanged = false;
 
-    const options = {
+    const options = null && {
       hideAll: false,
 
       hideSites: [
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         'Cutting bevel in mesh surface',
       ],
 
-      hideIfAllhidden: true,
+      hideIfAllHidden: false,
 
       showOptionsLink: true
     };

@@ -16,7 +16,7 @@
   <form>
     <p>
       <label>
-        <input type="radio" name="blockMode" value="all">
+        <input name="blockMode" type="radio" value="all">
         Hide all questions
       <label>
     </p>
@@ -24,11 +24,11 @@
     <fieldset>
       <legend>
         <label>
-          <input type="radio" name="blockMode" value="some" checked>
+          <input name="blockMode" type="radio" value="some" checked>
           Hide questions matching
-          <label><input type="radio" name="matchMode" value="any" checked>any</label>
+          <label><input name="matchMode" type="radio" value="any" checked />any</label>
           /
-          <label><input type="radio" name="matchMode" value="none">none</label>
+          <label><input name="matchMode" type="radio" value="none" />none</label>
           of the following
         </label>
       </legend>
@@ -37,36 +37,35 @@
         <label>
           Questions from these sites:
 
-          <textarea placeholder="philosophy.stackexchange.com
-Worldbuilding Stack Exchange
-salesforce
+          <textarea name="sites" placeholder="philosophy.stackexchange.com
+Drupal Answers
+anime
 ..."></textarea>
         </label>
       </p>
 
       <p>
         <label>
-          Questions with titles containing these keywords/keyphrases:
+          Questions with titles containing these words/phrases:
 
-          <textarea placeholder="star wars
+          <textarea name="keywords" placeholder="star wars
 the force
 skywalker
 ..."></textarea>
         </label>
       </p>
-
     </fieldset>
 
     <p>
       <label>
-        <input type="checkbox" name="showOptionsLink" checked>
+        <input name="showOptionsLink" type="checkbox" checked />
         Show link to these options below question list
       </label>
     </p>
 
     <p>
       <label>
-        <input type="checkbox" name="hideSectionIfEmpty" checked>
+        <input name="hideSectionIfEmpty" type="checkbox" />
         Hide HNQ heading and links if all questions are hidden
       </label>
     </p>
