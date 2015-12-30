@@ -1,0 +1,9 @@
+label {
+  padding: 4px 0;
+  cursor: pointer;
+}
+
+label:hover {
+  border-bottom: 3px solid rgba(0, 0, 0, 0.5);
+  margin-bottom: -3px;
+}

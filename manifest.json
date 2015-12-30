@@ -2,20 +2,34 @@
   "manifest_version": 2,
 
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApelY5byjSvAiMx0EJSSiEPZx6mwEVc2GNlBVN9WRmhpyq2HD65dDzVs5r157TyOQopleA52c39oKiQukjElPDTqokgl1ICFgl7CLZ7qPW0FKX5JlrIQX9+PE0LZcoiE8+JnoYX2wfwrNVFwie7LAf8xjt6CMx4U1s+62vRxmpVOH0Q14KqsybC92SRB8ZbJzXJySGJydJBmw3euhlqD53CnYyn63sYoxfk5s00krrPSGXjBan3ksMMp1USjO3NCmkqV0Xpsw33jP5w/c2RFKVGdsW/8VUtIbPaTjd0m+zIHAn6bVaDoMT9T//txBi8OPdnRlrm/DEVwUqB0xgokGlwIDAQAB",
-  "version": "0.0.0.3",
+  "version": "0.0.0.5",
 
   "name": "Hide Hot Network Question on Stack Exchange",
   "short_name": "Hide HNQs",
+  "icons": { "128": "icon128.png" },
 
   "content_scripts": [
     {
       "matches": [
-        "https://stackoverflow.com/*"
+        "*://stackoverflow.com/*",
+        "*://*.stackexchange.com/*",
+        "*://*.superuser.com/*",
+        "*://*.serverfault.com/*",
+        "*://*.stackapps.com/*",
+        "*://*.mathoverflow.com/*",
+        "*://*.askubuntu.com/*"
       ],
       "css": ["content.css"],
       "js": ["content.js"]
     }
   ],
+  "background": {
+    "scripts": ["background-nonpersistent.js"],
+    "persistent": false
+  },
 
-  "options_page": "options.html"
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
 }

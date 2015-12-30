@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   
   <title>
-    Options to Hide Hot Network Question on Stack Exchange
+    Hide Hot Network Question on Stack Exchange
   </title>
   
   <script src="/options.js"></script>
@@ -13,17 +13,11 @@
 </head>
 
 <body>
-  <h1>
-    Hide Hot Network Question on Stack Exchange - Options
-  </h1>
-  
-  <h1>NOT IMPLEMENTED</h1>
-  
   <form>
     <p>
       <label>
         <input type="radio" name="blockMode" value="all">
-        Hide all Hot Network Questions
+        Hide all questions
       <label>
     </p>
     
@@ -31,11 +25,11 @@
       <legend>
         <label>
           <input type="radio" name="blockMode" value="some" checked>
-          Hide Hot Network Questions matching
+          Hide questions matching
           <label><input type="radio" name="matchMode" value="any" checked>any</label>
           /
           <label><input type="radio" name="matchMode" value="none">none</label>
-          of these criteria
+          of the following
         </label>
       </legend>
       
@@ -43,6 +37,20 @@
         TBD
       </p>
     </fieldset>
+
+    <p>
+      <label>
+        <input type="checkbox" name="showOptionsLink" checked>
+        Show link to these options below question list
+      </label>
+    </p>
+
+    <p>
+      <label>
+        <input type="checkbox" name="hideSectionIfEmpty" checked>
+        Hide Hot Network Questions heading and links if no questions are visible
+      </label>
+    </p>
   </form>
 </body>
 </html>

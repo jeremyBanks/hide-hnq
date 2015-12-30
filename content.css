@@ -5,3 +5,8 @@
 #hot-network-questions li[data-jbsehnq-hidden=true] {
   display: none !important;
 }
+
+a.jbsehnq-options {
+  display: block;
+  margin: 8px 22px;
+}
