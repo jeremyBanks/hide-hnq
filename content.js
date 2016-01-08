@@ -24,7 +24,7 @@ gotOptions.then(options => {
       };
     }
 
-    const items = new Set(Array.from(document.querySelectorAll('li')));
+    const items = new Set(Array.from(hnq.querySelectorAll('li')));
     const visibleItems = options.hideAll ? new Set() : new Set(items);
     const hiddenItems = options.hideAll ? new Set(items) : new Set();
 
