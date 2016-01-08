@@ -52,7 +52,9 @@ gotOptions.then(options => {
             matched = true;
           } else if (link && (link.hostname === site ||
                               link.hostname.replace(/\.stackexchange\.com$/) === site ||
-                              link.hostname.replace(/\.com$/) === site)) {
+                              link.hostname.replace(/\.com$/) === site ||
+                              (site === 'current' &&
+                               link.hostname === location.hostname.replace(/^meta\./, '')))) {
             matched = true;
           }
         }
