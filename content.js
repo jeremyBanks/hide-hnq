@@ -75,28 +75,48 @@ gotOptions.then(options => {
       }
     }
 
-    if (visibleItems.size == 0) {
+    // handling "more hot questions"
+
+    // HACK: we assume that [style] definitely corresponds to style="display: list-item"
+
+    const numIntendedVisible =
+        hnq.querySelectorAll('li:not(.dno):not(.js-hidden),li[style]').length;
+    let numVisible =
+        hnq.querySelectorAll('li:not([data-jbsehnq-hidden=true]):not(.dno):not(.js-hidden),li:not([data-jbsehnq-hidden=true])[style]').length;
+    const potentialReveals =
+      Array.from(hnq.querySelectorAll('li:not([data-jbsehnq-hidden=true]).dno.js-hidden:not([style])'));
+
+    while (potentialReveals.length && numVisible < numIntendedVisible) {
+      const revealed = potentialReveals.pop();
+      revealed.classList.remove('dno');
+      revealed.classList.remove('js-hidden');
+      numVisible++;
+    }
+
+    if (potentialReveals.length === 0) {
       hnq.querySelector('a.show-more').dataset.jbsehnqHidden = 'true';
     }
 
+    // hiding and link options
+
     if (!options.hideIfAllHidden || visibleItems.size > 0) {
       hnq.dataset.jbsehnqHidden = 'false';
-
-      if (options.showOptionsLink) {
-        const optionsLink = document.createElement('a');
-        optionsLink.href = 'chrome://extensions/?options=jommfgnflipjalbpbgcfghdpoeijpoab';
-        optionsLink.textContent = "question hiding options";
-        optionsLink.title = `${hiddenItems.size} questions were hidden based on your current options for the Hide Hot Network Question on Stack Exchange extension.`;
-        optionsLink.classList.add('jbsehnq-options');
-        optionsLink.addEventListener('click', (event) => {
-          event.preventDefault();
-          chrome.runtime.sendMessage('openOptionsPage');
-        })
-        hnq.insertBefore(optionsLink, null);
-      }
     }
 
-    console.info(hiddenItems.size, " hot network questions (", hiddenItems, ") hidden by chrome://extensions/?options=jommfgnflipjalbpbgcfghdpoeijpoab");
+    if (options.showOptionsLink) {
+      const optionsLink = document.createElement('a');
+      optionsLink.href = 'chrome://extensions/?options=jommfgnflipjalbpbgcfghdpoeijpoab';
+      optionsLink.textContent = "question hiding options";
+      optionsLink.title = `${hiddenItems.size} questions were hidden based on your current options for the Hide Hot Network Question on Stack Exchange extension.`;
+      optionsLink.classList.add('jbsehnq-options');
+      optionsLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        chrome.runtime.sendMessage('openOptionsPage');
+      })
+      hnq.insertBefore(optionsLink, null);
+    }
+
+    console.info(hiddenItems.size, " hot network questions (", Array.from(hiddenItems), ") hidden by chrome://extensions/?options=jommfgnflipjalbpbgcfghdpoeijpoab");
   } catch (error) {
     // In case of error, we'll set this to make everything visible again.
     hnq.dataset.jbsehnqError = String(error);

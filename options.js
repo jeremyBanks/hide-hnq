@@ -1,3 +1,4 @@
+~function() {
 'use strict';
 
 const domContentLoaded = new Promise(
@@ -71,3 +72,5 @@ Promise.all([domContentLoaded, gotOptions]).then(results => {
     onPotentialChange();
   });
 });
+
+}();
