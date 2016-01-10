@@ -7,6 +7,7 @@
     Hide Hot Network Question on Stack Exchange
   </title>
 
+  <script src="/common/util.js"></script>
   <script src="/options/options.js"></script>
 
   <link rel="stylesheet" href="/options/options.css" />
@@ -73,15 +74,15 @@
     <p>
       Also hide
       <label>
-        <input name="x" type="radio" checked /> nothing
+        <input name="alsoHide" value="nothing" id="alsoHideNothing" type="radio" checked />nothing
       </label>
       /
       <label>
-        <input name="x" type="radio" /> entire community bulletin
+        <input name="alsoHide" value="bulletin" id="alsoHideBulletin" type="radio" />entire community bulletin
       </label>
       /
       <label>
-        <input name="x" type="radio" /> just hot meta posts
+        <input name="alsoHide" value="meta" id="alsoHideMeta" type="radio" />just hot meta posts
       </label>
     </p>
   </form>

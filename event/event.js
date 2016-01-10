@@ -1,3 +1,6 @@
+~/*
+  Event/non-persistent background page
+*/function() {
 'use strict';
 
 const defaultOptions = Object.freeze({
@@ -6,7 +9,8 @@ const defaultOptions = Object.freeze({
   matchSites: [],
   matchStrings: [],
   hideIfAllHidden: false,
-  showOptionsLink: true
+  showOptionsLink: true,
+  alsoHide: 'none'
 });
 
 const handlers = {
@@ -39,3 +43,5 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   Promise.resolve(result).then(sendResponse);
   return true;
 });
+
+}();

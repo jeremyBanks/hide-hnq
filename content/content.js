@@ -1,4 +1,6 @@
-~function() {
+~/*
+  Injected content script
+*/function() {
 'use strict';
 
 const hnq = document.querySelector('#hot-network-questions');
