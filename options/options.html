@@ -17,14 +17,14 @@
     <p>
       <label>
         <input name="blockMode" id="blockModeAll" type="radio" value="all">
-        Hide all questions
+        Hide all hot questions
       <label>
     </p>
 
     <p>
       <label>
         <input name="blockMode" id="blockModeSome" type="radio" value="some">
-        Hide questions matching
+        Hide hot questions matching
         <label><input name="matchMode" id="matchModeBlacklist" type="radio" value="blacklist" />any</label>
         /
         <label><input name="matchMode" id="matchModeWhitelist" type="radio" value="whitelist" />none</label>
@@ -35,7 +35,7 @@
     <fieldset>
       <p>
         <label>
-          Questions from these sites:
+          Hot questions from these sites:
 
           <textarea name="sites" placeholder=" e.g. philosophy.stackexchange.com (full domain)
       Worldbuilding Stack Exchange (full name)
@@ -46,7 +46,7 @@
 
       <p>
         <label>
-          Questions with titles containing these words/phrases:
+          Hot questions with titles containing these words/phrases:
 
           <textarea name="strings" placeholder=" e.g. star wars
       the force
@@ -59,14 +59,29 @@
     <p>
       <label>
         <input name="showOptionsLink" type="checkbox" />
-        Show link to these options below question list
+        Show link to these options below hot question list
       </label>
     </p>
 
     <p>
       <label>
         <input name="hideSectionIfEmpty" type="checkbox" />
-        Hide HNQ heading and links if all questions are hidden
+        Hide HNQ heading and links if all hot questions are hidden
+      </label>
+    </p>
+
+    <p>
+      Also hide
+      <label>
+        <input name="x" type="radio" checked /> nothing
+      </label>
+      /
+      <label>
+        <input name="x" type="radio" /> entire community bulletin
+      </label>
+      /
+      <label>
+        <input name="x" type="radio" /> just hot meta posts
       </label>
     </p>
   </form>

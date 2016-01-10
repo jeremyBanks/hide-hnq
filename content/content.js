@@ -94,7 +94,7 @@ gotOptions.then(options => {
     if (options.showOptionsLink) {
       const optionsLink = document.createElement('a');
       optionsLink.href = 'chrome://extensions/?options=jommfgnflipjalbpbgcfghdpoeijpoab';
-      optionsLink.textContent = "question hiding options";
+      optionsLink.textContent = "hot question filters";
       optionsLink.title = `${hiddenItems.size} questions were hidden based on your current options for the Hide Hot Network Question on Stack Exchange extension.`;
       optionsLink.classList.add('jbsehnq-options');
       optionsLink.addEventListener('click', (event) => {
