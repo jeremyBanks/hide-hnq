@@ -3,27 +3,15 @@
 
 const hnq = document.querySelector('#hot-network-questions');
 
-// We must do this before calling sendMessage to avoid instantiating the
+// We check this before calling sendMessage to avoid instantiating the
 // background page unnecessarily.
 if (!hnq) return;
 
 const gotOptions = new Promise(
-  resolve => chrome.runtime.sendMessage('getOptions', resolve));
+  resolve => chrome.runtime.sendMessage(['getOptions'], resolve));
 
 gotOptions.then(options => {
   try {
-    if (!options) {
-      // TODO: avoid manually duplicating this in both places
-      options = {
-        hideAll: true,
-        matchMode: 'blacklist',
-        matchSites: [],
-        matchStrings: [],
-        hideIfAllHidden: false,
-        showOptionsLink: true
-      };
-    }
-
     const items = new Set(Array.from(hnq.querySelectorAll('li')));
     const visibleItems = options.hideAll ? new Set() : new Set(items);
     const hiddenItems = options.hideAll ? new Set(items) : new Set();
@@ -111,7 +99,7 @@ gotOptions.then(options => {
       optionsLink.classList.add('jbsehnq-options');
       optionsLink.addEventListener('click', (event) => {
         event.preventDefault();
-        chrome.runtime.sendMessage('openOptionsPage');
+        chrome.runtime.sendMessage(['openOptionsPage']);
       })
       hnq.insertBefore(optionsLink, null);
     }

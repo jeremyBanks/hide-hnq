@@ -5,16 +5,7 @@ const domContentLoaded = new Promise(
   resolve => void document.addEventListener('DOMContentLoaded', resolve));
 
 const gotOptions = new Promise(
-  resolve => void chrome.storage.sync.get({
-    options: {
-      hideAll: true,
-      matchMode: 'blacklist',
-      matchSites: [],
-      matchStrings: [],
-      hideIfAllHidden: false,
-      showOptionsLink: true
-    }
-  }, data => resolve(data.options)));
+  resolve => chrome.runtime.sendMessage(['getOptions'], resolve));
 
 Promise.all([domContentLoaded, gotOptions]).then(results => {
   const options = results[1] || {};
@@ -54,7 +45,10 @@ Promise.all([domContentLoaded, gotOptions]).then(results => {
       showOptionsLink: form.showOptionsLink.checked
     };
 
-    chrome.storage.sync.set({options: options}, () => {
+    const setOptions = new Promise(
+      resolve => chrome.runtime.sendMessage(['setOptions', options], resolve));
+
+    setOptions.then(options => {
       document.body.classList.remove('dirty');
       console.log("saved options", options);
     });

@@ -1,24 +1,41 @@
 'use strict';
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  switch (request) {
-  case 'getOptions':
-    chrome.storage.sync.get({
-      'options': null
-    }, (data) => {
-      sendResponse(data.options);
-    });
+const defaultOptions = Object.freeze({
+  hideAll: true,
+  matchMode: 'blacklist', 
+  matchSites: [],
+  matchStrings: [],
+  hideIfAllHidden: false,
+  showOptionsLink: true
+});
 
-    return true; // to allow for async sendResponse call.
-    break;
+const handlers = {
+  getOptions() {
+    return new Promise(resolve => chrome.storage.sync.get({
+      'options': {}
+    }, data => {
+      const fullOptions = Object.assign({}, defaultOptions, data['options']);
+      resolve(fullOptions);
+    }));
+  },
 
-  case 'openOptionsPage':
+  setOptions(options) {
+    const fullOptions = Object.assign({}, defaultOptions, options);
+    return new Promise(resolve => chrome.storage.sync.set({
+      'options': fullOptions
+    }, () => {
+      resolve(fullOptions);
+    }));
+  },
+
+  openOptionsPage() {
     chrome.runtime.openOptionsPage();
-    sendResponse(null);
-
-    break;
-
-  default:
-    console.error("Got unexpected request " + request);
   }
+};
+
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  const result = handlers[request[0]].apply(handlers, request.slice(1));
+  Promise.resolve(result).then(sendResponse);
+  return true;
 });
