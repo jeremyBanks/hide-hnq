@@ -84,7 +84,10 @@ gotOptions.then(options => {
     }
 
     if (potentialReveals.length === 0) {
-      hnq.querySelector('a.show-more').dataset.jbsehnqHidden = 'true';
+      const showMore = hnq.querySelector('a.show-more');
+      if (showMore) {
+        showMore.dataset.jbsehnqHidden = 'true';
+      }
     }
 
     // hiding and link options
